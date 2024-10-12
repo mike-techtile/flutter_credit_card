@@ -14,6 +14,10 @@ CardType detectCCType(String cardNumber) {
 
   // Remove any spaces
   cardNumber = cardNumber.replaceAll(RegExp(r'\s+\b|\b\s'), '');
+  // we only need the first 6 digits to detect
+  if (cardNumber.length > 6) {
+    cardNumber = cardNumber.substring(0, 6);
+  }
 
   final int firstDigit = int.parse(
     cardNumber.length <= 1 ? cardNumber : cardNumber.substring(0, 1),

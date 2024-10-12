@@ -221,7 +221,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 child: Expanded(
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
+                    margin: const EdgeInsets.only(left: 16, top: 8),
                     child: TextFormField(
                       key: widget.expiryDateKey,
                       controller: _expiryDateController,
@@ -247,12 +247,17 @@ class _CreditCardFormState extends State<CreditCardForm> {
                   ),
                 ),
               ),
+              Visibility(
+                  visible: widget.isExpiryDateVisible,
+                  child: const SizedBox(
+                    width: 16,
+                  )),
               Expanded(
                 child: Visibility(
                   visible: widget.enableCvv,
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
+                    margin: const EdgeInsets.only(top: 8, right: 16),
                     child: TextFormField(
                       key: widget.cvvCodeKey,
                       obscureText: widget.obscureCvv,

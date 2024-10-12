@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_credit_card/src/credit_card_type_icon.dart';
 
 import 'credit_card_background.dart';
 import 'flip_animation_builder.dart';
@@ -291,7 +292,8 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
       widget.cardType ?? detectCCType(widget.cardNumber),
     );
     widget.onCreditCardWidgetChange(cardBrand);
-
+    final CardType ccType = widget.cardType ?? detectCCType(widget.cardNumber);
+    isAmex = ccType == CardType.americanExpress;
     return Stack(
       children: <Widget>[
         _cardGesture(
@@ -569,7 +571,11 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                     ),
                   ),
                 ),
-                _getCardTypeIcon(),
+                CreditCardTypeIcon(
+                  cardType: widget.cardType,
+                  cardNumber: widget.cardNumber,
+                  customCardTypeIcons: widget.customCardTypeIcons,
+                ),
               ],
             ),
           ),
@@ -677,7 +683,11 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
               alignment: Alignment.bottomRight,
               child: Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                child: _getCardTypeIcon(),
+                child: CreditCardTypeIcon(
+                  cardType: widget.cardType,
+                  cardNumber: widget.cardNumber,
+                  customCardTypeIcons: widget.customCardTypeIcons,
+                ),
               ),
             ),
           ),
@@ -729,14 +739,5 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
             ?.listen(_processFloatingEvent);
       }
     });
-  }
-
-  Widget _getCardTypeIcon() {
-    final CardType ccType = widget.cardType ?? detectCCType(widget.cardNumber);
-    isAmex = ccType == CardType.americanExpress;
-    return getCardTypeImage(
-      cardType: ccType,
-      customIcons: widget.customCardTypeIcons,
-    );
   }
 }

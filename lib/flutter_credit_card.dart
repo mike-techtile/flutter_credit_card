@@ -1,6 +1,7 @@
 library flutter_credit_card;
 
 export 'src/credit_card_form.dart';
+export 'src/credit_card_type_icon.dart';
 export 'src/credit_card_widget.dart';
 export 'src/floating_animation/floating_config.dart';
 export 'src/models/credit_card_brand.dart';
