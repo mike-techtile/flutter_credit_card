@@ -17,6 +17,7 @@ internal class GyroscopeStreamHandler(
 
     private val sensor: Sensor by lazy {
         sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+                ?: throw IllegalStateException("Gyroscope sensor not available")
     }
 
     override fun onListen(arguments: Any?, events: EventSink) {
